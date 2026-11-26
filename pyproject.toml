@@ -1,0 +1,18 @@
+[project]
+name = "datetime-toolkit-mcp"
+version = "0.1.0"
+description = "A local-only date and time MCP toolkit with timezone conversion"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+    "mcp>=1.2.0",
+    "tzdata>=2024.1",
+]
+
+[project.scripts]
+datetime-toolkit = "server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

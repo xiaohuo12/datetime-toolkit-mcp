@@ -1,0 +1,44 @@
+# chatmcp.yaml — MCP.so 托管配置
+# 该服务为纯本地计算、无需任何 API Key，因此 params 为空。
+params:
+  type: object
+  properties: {}
+  required: []
+
+# 托管平台以 streamable-http 方式运行（Dockerfile 中已设置 MCP_TRANSPORT）
+rest:
+  name: datetime-toolkit
+  port: 8000
+  endpoint: /mcp
+
+# Python 服务不使用 npx；保留该段仅供平台识别，实际以 docker 启动
+npx:
+  command: |
+    pip install -r requirements.txt && python server.py
+  config: |
+    {
+      "mcpServers": {
+        "datetime-toolkit": {
+          "command": "python",
+          "args": ["server.py"],
+          "env": {
+            "MCP_TRANSPORT": "streamable-http",
+            "MCP_HOST": "0.0.0.0",
+            "MCP_PORT": "8000"
+          }
+        }
+      }
+    }
+
+docker:
+  command: |
+    docker run -i --rm -p 8000:8000 datetime-toolkit-mcp:latest
+  config: |
+    {
+      "mcpServers": {
+        "datetime-toolkit": {
+          "command": "docker",
+          "args": ["run", "-i", "--rm", "-p", "8000:8000", "datetime-toolkit-mcp:latest"]
+        }
+      }
+    }
