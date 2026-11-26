@@ -32,22 +32,27 @@ python server.py
 # 服务地址：http://127.0.0.1:8000/mcp
 ```
 
-## 客户端配置
+## 服务配置（Server config）
 
-**stdio 方式**（`claude_desktop_config.json` / `.cursor/mcp.json`）：
+### stdio（本地客户端，推荐）
+
+复制到 `claude_desktop_config.json` / `.cursor/mcp.json` / Trae 的 MCP 配置中。
+`args[0]` 请替换为本仓库 `server.py` 的**绝对路径**：
 
 ```json
 {
   "mcpServers": {
     "datetime-toolkit": {
       "command": "python",
-      "args": ["绝对路径/server.py"]
+      "args": ["/absolute/path/to/datetime-mcp-server/server.py"]
     }
   }
 }
 ```
 
-**streamable-http 方式**：
+### streamable-http（远程/托管）
+
+先按上文启动 HTTP 模式，再连接：
 
 ```json
 {
@@ -58,6 +63,8 @@ python server.py
   }
 }
 ```
+
+> 环境变量（可选）：`DATETIME_TOOLKIT_TZ` 默认时区、`MCP_TRANSPORT` 传输方式、`MCP_HOST` / `MCP_PORT` HTTP 监听地址。本服务无需任何 API Key。
 
 ## Docker
 
