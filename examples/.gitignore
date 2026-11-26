@@ -1,0 +1,10 @@
+# 真实密钥文件，绝不提交
+.env
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 虚拟环境
+.venv/
+venv/
